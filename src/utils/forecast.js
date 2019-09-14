@@ -9,10 +9,12 @@ const forecast = (latitude, longtitude, callback) => {
         } else if (body.error) {
             callback('Unable to find forcasting information. Try another search.', undefined)
         } else {
+            console.log(body)
             summary = body.daily.data[0].summary
             degree = body.currently.temperature
             chanceOfRain = body.currently.precipProbability
-            callback(undefined, `${summary} It is currently ${degree} degrees out. There is a ${chanceOfRain * 100}% chance of rain`)
+            windSpeed = body.currently.windSpeed
+            callback(undefined, `${summary} It is currently ${degree} degrees out. There is a ${chanceOfRain * 100}% chance of rain. 풍속은 ${windSpeed}입니다.`)
         }
     })
 }
